@@ -1,0 +1,76 @@
+package helpers;
+
+/**
+ * Created by mgoncalves on 12/08/2015.
+ */
+public class MessageFileToUser {
+    public static final String FIELD_BY_ID_NOT_FOUND = "Invalid ID, expected:'%s'.";
+    public static final String FIELD_BY_NAME_NOT_FOUND = "Invalid Name, expected:'%s'.";
+    public static final String FIELD_BY_XPATH_NOT_FOUND = "Invalid Xpath, expected:'%s'.";
+    public static final String FIELD_BY_CSS_SELECTOR_NOT_FOUND = "Invalid CSS Selector, expected:'%s'.";
+    public static final String FIELD_NOT_PRESENT = "Invalid FIELD, field expected:'%s'.";
+    public static final String FIELD_PRESENT = "Field '%s' but it should not be.";
+    public static final String TEXT_NOT_FOUND = "Text '%s' was not found.";
+    public static final String TEXT_FOUND = "Text '%s' was not expected but was found.";
+    public static final String PAGE_NOT_OPEN = "Page '%s' was not open.";
+    public static final String PAGE_OPEN = "Page '%s' was open.";
+    public static final String PASSWORD_HIDDEN = "Password is not hidden.";
+    public static final String VUSER_STATUS = "Expected status: '%s'. Actual: '%s'";
+    public static final String VUSER_LICENSE_TYPE = "Expected License Type: '%s'. Expected:'%s'";
+    public static final String BUTTON_NOT_FOUND = "Button '%s' was not found.";
+    public static final String WRONG_PAGE = "This is not '%s' page, current page is: '%s'";
+    public static final String COLLABORATE_BRIDGE_PRESENT = "The Collaborate Bridge '%s' is not present.";
+    public static final String ADD_NEW_USER = "Add New User button is not present.";
+    public static final String SEARCH_LIST_NOT_EMPTY = "The search result list is not empty";
+    public static final String SEARCH_USER_TEXT = "'Search for a user' textfield is not present.";
+    public static final String SEARCH_BTN = "The 'Search' button is not present.";
+    public static final String FIND_TYPE = "The 'Type' combobox is not present.";
+    public static final String FIND_STATUS = "The 'Status' combobox is not present";
+    public static final String FIND_FIELD_REQUIRED = "The 'This field is required' message was not displayed.";
+    public static final String CAPTCHA = "The message 'There was an error during CAPTCHA validation.' was not displayed.";
+    public static final String VUSER_MULTI_STATUS = "Expected multiple status but get always '%s'";
+    public static final String CHECKED_BUTTON = "Expected '%s' checked but get '%s'";
+    public static final String SEARCH_BY_NAME_RESULT = "Search by user '%s' '%s' name but the search result is incorrect.";
+    public static final String DROPDOWN_VALUES = "Some dropdown values for '%s' are not displayed.";
+    public static final String USERS_TYPE_VALUES = "Users filtered by '%s' type but get users from '%s'";
+    public static final String VUSER_MULTI_TYPES = "Expected users from all types but get always the same";
+    public static final String EDIT_PANEL_OPENED = "Is the Edit panel opened? '%s";
+    public static final String CONFIRM_DELETE = "Is the delete confirmation panel displayed? '%s";
+    public static final String UPDATED_AVAILABLE_ACCOUNTS = "Available accounts should be '%s'(-1 if unlimited) but is '%s')";
+    public static final String KEY_NOT_ASSIGNED = "The key: '%s' is not assigned in '%s' position of device";
+    public static final String MANDATORY_NAME_ALERT_DISPLAYED = "Is the mandatory name alert displayed? '%s'";
+    public static final String MANDATORY_ALERT_DISPLAYED_MISSING = "The mandatory field '%s' is missing.";
+    public static final String OPTIONAL_ALERT_DISPLAYED_MISSING = "The optional field '%s' is missing.";
+    public static final String MANDATORY_NUMBER_ALERT_DISPLAYED = "Is the mandatory name alert displayed? '%s'";
+    public static final String NAME_FIELD_SIZE = "The name field contains 30 characters? '%s'";
+    public static final String NAME_UPDATED = "The name was updated? '%s'";
+    public static final String SAVE_USER_ENABLED = "The save button is enabled?'%s'";
+    public static final String NUMBER_OF_USERS_DISPLAYED_INCORRECT = "The number of users displayed should be '%s' but it is '%s'";
+    public static final String NUMBER_OF_USERS_PER_PAGE_INCORRECT = "The number of users selected per page should be be '%s' but it is '%s'";
+    public static final String SELECTED_PAGE_INCORRECT = "The selected page should be '%s' but it is '%s'";
+    public static final String PAGINATION_SHOULD_NOT_BE_PRESENT = "The pagination shouldn't be present in page";
+    public static final String MAXIMUM_USERS_EXCEEDED = "The Maximum number of users should be '%s', but it is '%s'";
+    public static final String INCORRECT_PAGE_SIZE_SELECTED = "The page size selected should be '%s', but it is '%s'";
+    public static final String ELEMENT_NOT_FOUND = "Element was not found. Element: '%s'";
+    public static final String TAG_WAS_NOT_SAVED = "The tag was not saved";
+    public static final String USER_EXISTENT = "The following user should not be added: '%s'";
+    public static final String BUTTON_NOT_DISABLED = "Button '%s' not disabled";
+    public static final String ELEMENT_NOT_PRESENT = "Element '%s' not present";
+    public static final String DROPDOWN_VALUE_NOT_SELECTED = "Dropdown value '%s' not selected";
+    public static final String ELEMENT_IS_PRESENT = "Element '%s' is present";
+    public static final String VALUE_NOT_IN_TABLE = "Value '%s' not found in table";
+    public static final String VALUE_NOT_SAME = "Value '%s' expected, but found value '%s'";
+    public static final String MISSING_SECTIONS = "Not all expected sections are present";
+    public static final String RADIO_NOT_SELECTED = "The radio button is not selected";
+    public static final String MISSING_FACS = "No FACs are displayed.";
+    public static final String INVALID_ARGUMENT = "Invalid argument '%s'";
+    public static final String ERROR_AFTER_SAVE = "Error after save. The message '%s' is prensent on Screen";
+    public static final String LICENSES = "Number of licenses is not correct.";
+    public static final String ERROR_IMAGE_NOT_SAME = "Expected image '%s' and the image actual is '%s'";
+    public static final String NOT_CLICKABLE = "Element '%s' is not clickable.'";
+    public static final String VALUE_NOT_CHANGED = "The value is still '%s'";
+    public static final String ENABLED = "Element '%s' is enabled";
+    public static final String CHECKED = "Check box '%s' is checked";
+    public static final String ERROR_DOWNLOADING_ANNOUNCEMENT = "Error downloading announcement.";
+    public static final String ERROR_REMOVING_ANNOUNCEMENT = "Error removing announcement.";
+}
