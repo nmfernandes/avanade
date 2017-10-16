@@ -1,5 +1,8 @@
 # Technical Test Exercise
 
+# Language
+Java
+
 # To run
 mvn -Dtest=CareersTest test
 
