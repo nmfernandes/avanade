@@ -11,16 +11,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-
+/**
+ * Contains methods that can be used in any Page class
+ */
 public class PageObject {
-    public static final int DEFAULT_WAIT_TIMEOUT = 10;
-    public static WebDriver driver;
-    static WebDriverWait wait;
+    private static final int DEFAULT_WAIT_TIMEOUT = 10;
+    static WebDriver driver;
+    private static WebDriverWait wait;
 
-
-    public PageObject() {
+    PageObject(String session, String browser) {
         try {
-            this.driver = Drivers.loadDriver();
+            driver = Drivers.createOrLoadDriver(session, browser);
+
+            /**
+             * The PageFactory Class is an extension to the Page Object design pattern.
+             * It is used to initialize the elements of the Page Object or instantiate the Page Objects itself.
+             */
             PageFactory.initElements(driver, this);
         } catch (Exception e) {
             e.printStackTrace();
@@ -28,31 +34,33 @@ public class PageObject {
         constructorSupport();
     }
 
-    public PageObject(String session, String browser) {
-        try {
-            this.driver = Drivers.createOrLoadDriver(session, browser);
-            PageFactory.initElements(driver, this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        constructorSupport();
-    }
-
-    public void constructorSupport() {
-
+    private void constructorSupport() {
         wait = new WebDriverWait(driver, DEFAULT_WAIT_TIMEOUT);
     }
 
-    public void verifyPageOpenIsExpected(String title) {
+    /**
+     * Verify if the correct page was open
+     * @param title
+     */
+    void verifyPageOpenIsExpected(String title) {
         String expectedTitle = Utils.getResourceBundle().getString(title);
         try {
             wait.until(ExpectedConditions.titleIs(expectedTitle));
         } catch (Exception ex) {
-            throw new IllegalStateException(String.format(MessageFileToUser.WRONG_PAGE, expectedTitle, driver.getTitle()));
+            throw new IllegalStateException(String.format(MessageFileToUser.WRONG_PAGE, expectedTitle,
+                    driver.getTitle()));
         }
     }
 
-    public WebElement findByTextInContainerGivenParentElement(String text, WebElement parent, String parentDesc) throws Exception {
+    /**
+     * Given an element, search for a given text in the child nodes of that element
+     * @param text
+     * @param parent
+     * @param parentDesc
+     * @return
+     * @throws Exception
+     */
+    WebElement findByTextInContainerGivenParentElement(String text, WebElement parent, String parentDesc) throws Exception {
 
         try {
             return (WebElement) wait.until(new ExpectedConditionParentWebElementChildBy(parent,
@@ -63,21 +71,29 @@ public class PageObject {
         }
     }
 
-    public List<WebElement> findListElementsWithTimeout(By by, String identifier) throws Exception {
+    /**
+     * Given a By parameter, wait that the element is visible
+     * @param by
+     * @param identifier
+     * @return
+     * @throws Exception
+     */
+    private List<WebElement> findListElementsWithTimeout(By by, String identifier) throws Exception {
 
         try {
-            try {
-                wait.until(ExpectedConditions.visibilityOfElementLocated(by));
-            } catch (Exception ex) {
-            } finally {
-                return driver.findElements(by);
-            }
+            wait.until(ExpectedConditions.visibilityOfElementLocated(by));
+            return driver.findElements(by);
         } catch (Exception e) {
-
             throw new Exception(String.format(MessageFileToUser.ELEMENT_NOT_VISIBLE, identifier));
         }
     }
 
+    /**
+     * Find a given text
+     * @param key
+     * @return
+     * @throws Exception
+     */
     public WebElement findByText(String key) throws Exception {
         String text = Utils.getResourceBundle().getString(key);
         String xpathQuery = "//*[contains(text(), '" + text + "')]";
@@ -94,7 +110,14 @@ public class PageObject {
         return w;
     }
 
-    protected WebElement waitToBeClickable(WebElement element, String identifier) throws Exception {
+    /**
+     * Wait that an element is clickable
+     * @param element
+     * @param identifier
+     * @return
+     * @throws Exception
+     */
+    WebElement waitToBeClickable(WebElement element, String identifier) throws Exception {
 
         try {
             return new WebDriverWait(driver, DEFAULT_WAIT_TIMEOUT)
@@ -104,7 +127,14 @@ public class PageObject {
         }
     }
 
-    protected WebElement waitToBeVisible(WebElement element, String identifier) throws Exception {
+    /**
+     * Wait that an element is visible
+     * @param element
+     * @param identifier
+     * @return
+     * @throws Exception
+     */
+    WebElement waitToBeVisible(WebElement element, String identifier) throws Exception {
 
         try {
             return new WebDriverWait(driver, DEFAULT_WAIT_TIMEOUT)

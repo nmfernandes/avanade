@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
 public class ExpectedConditionParentWebElementChildBy implements ExpectedCondition {
-    By childLocator;
-    WebElement parent;
+    private By childLocator;
+    private WebElement parent;
 
     public ExpectedConditionParentWebElementChildBy(WebElement parent, By childLocator) {
         this.childLocator = childLocator;
@@ -16,8 +16,6 @@ public class ExpectedConditionParentWebElementChildBy implements ExpectedConditi
 
     @Override
     public Object apply(Object o) {
-        WebElement result = parent.findElement(childLocator);
-
-        return result;
+        return parent.findElement(childLocator);
     }
 }

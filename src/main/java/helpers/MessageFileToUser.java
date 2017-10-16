@@ -1,7 +1,7 @@
 package helpers;
 
 /**
- * Created by mgoncalves on 12/08/2015.
+ * Messages to be included in exceptions and asserts
  */
 public class MessageFileToUser {
 

@@ -18,11 +18,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Drivers {
-    public static List<WebDriver> drivers;
+    private static List<WebDriver> drivers;
     private static WebDriver driver;
-    public static List<String> sessions;
+    private static List<String> sessions;
     private static String currentSession;
-
 
     public static WebDriver loadDriver() {
         return driver;
@@ -94,7 +93,8 @@ public class Drivers {
      */
     private static void setFirefoxProfile(String workingDir) {
         Utils utils = new Utils();
-        System.setProperty("webdriver.gecko.driver", utils.getData("LocalConf", "PATH_FIREFOX_DRIVER"));
+        String os = utils.getData("LocalConf", "OS");
+        System.setProperty("webdriver.gecko.driver", utils.getData("LocalConf", "PATH_FIREFOX_DRIVER_"+os));
         DesiredCapabilities capability = DesiredCapabilities.firefox();
         capability.acceptInsecureCerts();
         FirefoxOptions firefoxOptions = new FirefoxOptions(capability);
@@ -117,7 +117,8 @@ public class Drivers {
         options.addArguments("window-size=1936,1056");
         caps.setCapability(ChromeOptions.CAPABILITY, options);
 
-        System.setProperty("webdriver.chrome.driver", utils.getData("LocalConf", "PATH_CHROME_DRIVER"));
+        String os = Utils.getData("LocalConf", "OS");
+        System.setProperty("webdriver.chrome.driver", Utils.getData("LocalConf", "PATH_CHROME_DRIVER_"+os));
         try {
             driver = new ChromeDriver(options);
         } catch (Exception ex) {
@@ -127,7 +128,8 @@ public class Drivers {
 
     private static void setIEProfile(String workingDir) {
         Utils utils = new Utils();
-        System.setProperty("webdriver.ie.driver", utils.getData("LocalConf", "PATH_IE_DRIVER"));
+        String os = Utils.getData("LocalConf", "OS");
+        System.setProperty("webdriver.ie.driver", Utils.getData("LocalConf", "PATH_IE_DRIVER_"+os));
         DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
         capability.setCapability("EnableNativeEvents", false);
         capability.setCapability("ignoreZoomSetting", true);
@@ -150,7 +152,8 @@ public class Drivers {
 
     private static void setEdgeProfile(String workingDir) {
         Utils utils = new Utils();
-        System.setProperty("webdriver.edge.driver", utils.getData("LocalConf", "PATH_EDGE_DRIVER"));
+        String os = Utils.getData("LocalConf", "OS");
+        System.setProperty("webdriver.edge.driver", Utils.getData("LocalConf", "PATH_EDGE_DRIVER_"+os));
         DesiredCapabilities capability = DesiredCapabilities.edge();
         capability.setCapability("EnableNativeEvents", false);
         capability.setCapability("ignoreZoomSetting", true);

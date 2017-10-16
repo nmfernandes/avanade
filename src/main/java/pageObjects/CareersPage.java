@@ -1,23 +1,29 @@
 package pageObjects;
 
-import helpers.Utils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * Created by nnnn1 on 15/10/2017.
+ * Page class of the Careers page
+ * Extends PageObject class
  */
 public class CareersPage extends PageObject{
-    public static final String TITLE = "CAREERS_TITLE";
+    private static final String TITLE = "CAREERS_TITLE";
+    private static final String EXPLORE_AVANADE_CAREERS = "Explore Avanade Careers";
     @FindBy(xpath = "//*[contains(text(), 'Explore Avanade Careers')]")
-    WebElement exploreCareersBtn;
+    private WebElement exploreCareersBtn;
 
     public CareersPage(String session, String browser) throws Exception {
         super(session, browser);
         verifyPageOpenIsExpected(TITLE);
     }
 
-    public void clickOnExploreCareersBtn(){
+    /**
+     * Click on Explore Careers Button
+     * @throws Exception
+     */
+    public void clickOnExploreCareersBtn() throws Exception {
+        waitToBeClickable(exploreCareersBtn, EXPLORE_AVANADE_CAREERS);
         exploreCareersBtn.click();
     }
 
