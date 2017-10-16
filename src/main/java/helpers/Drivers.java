@@ -24,38 +24,37 @@ public class Drivers {
     private static String currentSession;
 
 
-    public static WebDriver loadDriver(){
+    public static WebDriver loadDriver() {
         return driver;
     }
 
-    public static String getSession(){
+    public static String getSession() {
         return currentSession;
     }
 
-    public static WebDriver loadDriver(String session){
+    public static WebDriver loadDriver(String session) {
         int index = sessions.indexOf(session);
         currentSession = session;
         return drivers.get(index);
     }
 
     public static WebDriver createOrLoadDriver(String session, String browser) throws Exception {
-        if(session == null) {
+        if (session == null) {
             driver = loadDriver();
-        }
-        else if (drivers == null || drivers.size() == 0 || sessions.indexOf(session)==-1) {
+        } else if (drivers == null || drivers.size() == 0 || sessions.indexOf(session) == -1) {
 
             String browserParam = System.getProperty("browser");
-            if (browserParam!=null){
-                browser=browserParam;
+            if (browserParam != null) {
+                browser = browserParam;
             }
 
             Drivers.setProfile(browser);
 
-            if(drivers == null)
+            if (drivers == null)
                 drivers = new ArrayList<>();
             drivers.add(driver);
 
-            if(sessions == null)
+            if (sessions == null)
                 sessions = new ArrayList<>();
             sessions.add(session);
         } else {
@@ -64,36 +63,38 @@ public class Drivers {
         }
         try {
             driver.manage().window().maximize();
-        }catch (Exception ex){}
+        } catch (Exception ex) {
+        }
         return driver;
     }
 
     public static void setProfile(String browser) throws Exception {
-        if(browser == null)
-            browser= Utils.getBrowser();
+        if (browser == null)
+            browser = Utils.getBrowser();
 
         String workingDir = System.getProperty("user.dir");
-        if ("firefox".equals(browser.toLowerCase())){
+        if ("firefox".equals(browser.toLowerCase())) {
             setFirefoxProfile(workingDir);
-        }else if ("edge".equals(browser.toLowerCase())){
+        } else if ("edge".equals(browser.toLowerCase())) {
             setEdgeProfile(workingDir);
-        }else if ("safari".equals(browser.toLowerCase())){
+        } else if ("safari".equals(browser.toLowerCase())) {
             setSafariProfile(workingDir);
-        }else if ("ie".equals(browser.toLowerCase())) {
+        } else if ("ie".equals(browser.toLowerCase())) {
             setIEProfile(workingDir);
-        }else{
+        } else {
             setChromeProfile(workingDir);
         }
     }
 
     /**
      * Set profile to Firefox
+     *
      * @param workingDir
      * @return firefoxProfile
      */
     private static void setFirefoxProfile(String workingDir) {
         Utils utils = new Utils();
-        System.setProperty("webdriver.gecko.driver", utils.getData("LocalConf","PATH_FIREFOX_DRIVER"));
+        System.setProperty("webdriver.gecko.driver", utils.getData("LocalConf", "PATH_FIREFOX_DRIVER"));
         DesiredCapabilities capability = DesiredCapabilities.firefox();
         capability.acceptInsecureCerts();
         FirefoxOptions firefoxOptions = new FirefoxOptions(capability);
@@ -102,6 +103,7 @@ public class Drivers {
 
     /**
      * Set profile to Chorme
+     *
      * @param workingDir
      */
     private static void setChromeProfile(String workingDir) {
@@ -115,18 +117,18 @@ public class Drivers {
         options.addArguments("window-size=1936,1056");
         caps.setCapability(ChromeOptions.CAPABILITY, options);
 
-        System.setProperty("webdriver.chrome.driver", utils.getData("LocalConf","PATH_CHROME_DRIVER"));
+        System.setProperty("webdriver.chrome.driver", utils.getData("LocalConf", "PATH_CHROME_DRIVER"));
         try {
             driver = new ChromeDriver(options);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-    
+
     private static void setIEProfile(String workingDir) {
         Utils utils = new Utils();
-        System.setProperty("webdriver.ie.driver", utils.getData("LocalConf","PATH_IE_DRIVER"));
-        DesiredCapabilities capability = DesiredCapabilities.internetExplorer ();
+        System.setProperty("webdriver.ie.driver", utils.getData("LocalConf", "PATH_IE_DRIVER"));
+        DesiredCapabilities capability = DesiredCapabilities.internetExplorer();
         capability.setCapability("EnableNativeEvents", false);
         capability.setCapability("ignoreZoomSetting", true);
         capability.setCapability("trustAllSSLCertificates ", true);
@@ -137,7 +139,7 @@ public class Drivers {
         InternetExplorerOptions options = new InternetExplorerOptions(capability);
         try {
             driver = new InternetExplorerDriver(options);
-        }catch (Exception ex){
+        } catch (Exception ex) {
         }
     }
 
@@ -148,7 +150,7 @@ public class Drivers {
 
     private static void setEdgeProfile(String workingDir) {
         Utils utils = new Utils();
-        System.setProperty("webdriver.edge.driver", utils.getData("LocalConf","PATH_EDGE_DRIVER"));
+        System.setProperty("webdriver.edge.driver", utils.getData("LocalConf", "PATH_EDGE_DRIVER"));
         DesiredCapabilities capability = DesiredCapabilities.edge();
         capability.setCapability("EnableNativeEvents", false);
         capability.setCapability("ignoreZoomSetting", true);
@@ -167,14 +169,17 @@ public class Drivers {
             drivers.remove(index);
             sessions.remove(index);
 
-        }catch (Exception ex){}
+        } catch (Exception ex) {
+        }
     }
 
     public static void destroyLastDriver() {
-        try {sessions.remove(sessions.size()-1);
-            drivers.get(drivers.size()-1).quit();
-            drivers.remove(drivers.size()-1);
-        }catch (Exception ex){}
+        try {
+            sessions.remove(sessions.size() - 1);
+            drivers.get(drivers.size() - 1).quit();
+            drivers.remove(drivers.size() - 1);
+        } catch (Exception ex) {
+        }
     }
 
 }

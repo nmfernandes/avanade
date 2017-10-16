@@ -41,7 +41,7 @@ public class Utils {
     }
 
     public static Iterator<JSONObject> getJsonIterator() throws IOException, ParseException {
-        FileReader fileReader = new FileReader(new File( "." ).getCanonicalPath()+USERS_FILE);
+        FileReader fileReader = new FileReader(new File(".").getCanonicalPath() + USERS_FILE);
         JSONParser parser = new JSONParser();
         Object obj = parser.parse(fileReader);
         JSONArray jsonArray = (JSONArray) obj;
@@ -49,25 +49,25 @@ public class Utils {
     }
 
     public static JSONObject getJson(String file, String element) throws ParseException {
-         try {
-             FileReader fileReader = new FileReader(new File( "." ).getCanonicalPath()+file);
-             JSONParser parser = new JSONParser();
-             Object obj = parser.parse(fileReader);
-             JSONArray jsonArray = (JSONArray) obj;
-             Iterator<JSONObject> iterator = jsonArray.iterator();
-             while (iterator.hasNext()) {
-                 JSONObject userToCompare = iterator.next();
-                 if (userToCompare.get("user").equals(element)){
-                     return userToCompare;
-                 }
-             }
-            return  null;
+        try {
+            FileReader fileReader = new FileReader(new File(".").getCanonicalPath() + file);
+            JSONParser parser = new JSONParser();
+            Object obj = parser.parse(fileReader);
+            JSONArray jsonArray = (JSONArray) obj;
+            Iterator<JSONObject> iterator = jsonArray.iterator();
+            while (iterator.hasNext()) {
+                JSONObject userToCompare = iterator.next();
+                if (userToCompare.get("user").equals(element)) {
+                    return userToCompare;
+                }
+            }
+            return null;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return  null;
+        return null;
     }
 
     public static List<String> getAllUserKeys(String userType, String enterprise) throws ParseException {
@@ -78,9 +78,9 @@ public class Utils {
             Iterator<JSONObject> iterator = getJsonIterator();
             while (iterator.hasNext()) {
                 JSONObject userToCompare = iterator.next();
-                if(userToCompare.get("enterprise")!=null)
-                    if (userToCompare.get("userType").equals(userType) && userToCompare.get("enterprise").equals(enterprise)){
-                        users.add( (String) userToCompare.get("user"));
+                if (userToCompare.get("enterprise") != null)
+                    if (userToCompare.get("userType").equals(userType) && userToCompare.get("enterprise").equals(enterprise)) {
+                        users.add((String) userToCompare.get("user"));
                     }
             }
             return users;
@@ -89,7 +89,7 @@ public class Utils {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return  null;
+        return null;
     }
 
     public static List<String> getUsersToDelete(String license, String enterpriseKey) {
@@ -107,7 +107,7 @@ public class Utils {
                 String str = (String) em.nextElement();
 
                 if (prop.get(str).toString().contains(license) && prop.get(str).toString().contains(enterpriseKey)
-                        && Integer.parseInt(str.substring(str.length()-1)) > nMaxLicenses )
+                        && Integer.parseInt(str.substring(str.length() - 1)) > nMaxLicenses)
                     keys.add(str);
 
             }
@@ -125,6 +125,7 @@ public class Utils {
         JSONObject jsonObject = getJsonFile(userKey);
         return (String) jsonObject.get("name");
     }
+
     public static String getLastNameJson(String userKey) throws ParseException {
         JSONObject jsonObject = getJsonFile(userKey);
         return (String) jsonObject.get("lastName");
@@ -157,22 +158,27 @@ public class Utils {
         JSONObject jsonObject = getJsonFile(userKey);
         return (String) jsonObject.get("type");
     }
+
     public static String getUserTypeJson(String userKey) throws ParseException {
         JSONObject jsonObject = getJsonFile(userKey);
         return (String) jsonObject.get("userType");
     }
+
     public static String getEmailJson(String userKey) throws ParseException {
         JSONObject jsonObject = getJsonFile(userKey);
         return (String) jsonObject.get("email");
     }
+
     public static String getTemplateJson(String userKey) throws ParseException {
         JSONObject jsonObject = getJsonFile(userKey);
         return (String) jsonObject.get("template");
     }
+
     public static String getDeviceTypeJson(String userKey) throws ParseException {
         JSONObject jsonObject = getJsonFile(userKey);
         return (String) jsonObject.get("deviceType");
     }
+
     public static String getDeviceModelJson(String userKey) throws ParseException {
         JSONObject jsonObject = getJsonFile(userKey);
         return (String) jsonObject.get("deviceModel");
@@ -182,6 +188,7 @@ public class Utils {
         JSONObject jsonObject = getJsonFile(userKey);
         return (String) jsonObject.get("maxBridgeParticipant");
     }
+
     public static String getMaxRoomParticipantsValueJson(String userKey) throws ParseException {
         JSONObject jsonObject = getJsonFile(userKey);
         return (String) jsonObject.get("maxRoomParticipantsValue");
@@ -230,11 +237,11 @@ public class Utils {
 
     public static ResourceBundle getResourceBundle() {
         final String messagesBundle = "Messages";
-        String language = Utils.getData(localConf,"LANGUAGE");
-        String country = Utils.getData(localConf,"COUNTRY");
+        String language = Utils.getData(localConf, "LANGUAGE");
+        String country = Utils.getData(localConf, "COUNTRY");
         String path = Utils.getData(localConf, "LANGUAGE_PROPERTIES_FILES_PATH");
         Locale currentLocale = new Locale(language, country);
 
-        return ResourceBundle.getBundle(path + File.separator+messagesBundle,currentLocale);
+        return ResourceBundle.getBundle(path + File.separator + messagesBundle, currentLocale);
     }
 }

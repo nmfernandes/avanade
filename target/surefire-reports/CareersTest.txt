@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: CareersTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 28.545 sec <<< FAILURE! - in CareersTest
+resultsLocation3Test(CareersTest)  Time elapsed: 28.506 sec  <<< ERROR!
+java.lang.Exception: Text 'Experience creating and implementing testing framework for web applications such as Selenium' not present.
+	at CareersTest.resultsLocation3Test(CareersTest.java:74)
+
